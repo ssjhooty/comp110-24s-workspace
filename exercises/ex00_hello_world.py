@@ -1,2 +1,2 @@
 print("Hello, world.")
-__author__ = "730475919"
+#__author__ = "730475919"

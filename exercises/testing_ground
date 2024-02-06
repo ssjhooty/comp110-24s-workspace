@@ -1,0 +1,68 @@
+# Named constants for emoji boxes
+BLUE_BOX: str = "\U0001F7E6"
+RED_BOX: str = "\U0001F7E5"
+WHITE_BOX: str = "\U00002B1C"
+
+# Part 1: Prompting for Player 1 Input
+
+try:
+    # Prompting for Player 1 input
+    player1_input = int(input("Pick a secret boat location between 1 and 4: "))
+
+    # Checking if the input is within the valid range
+    if 1 <= player1_input <= 4:
+        # Valid input, exit program without printing anything
+        pass
+    else:
+        # Invalid input, print error message and exit
+        print(f"Error! {player1_input} too {'low' if player1_input < 1 else 'high'}!")
+        exit()
+
+except ValueError:
+    # Handling non-integer input
+    print("Error! Please enter a valid integer between 1 and 4.")
+    exit()
+
+# Part 2: Prompting for Player 2 Input
+
+try:
+    # Prompting for Player 2 input
+    player2_input = int(input("Guess a number between 1 and 4: "))
+
+    # Checking if the input is within the valid range
+    if 1 <= player2_input <= 4:
+        # Valid input, exit program without printing anything
+        pass
+    else:
+        # Invalid input, print error message and exit
+        print(f"Error! {player2_input} too {'low' if player2_input < 1 else 'high'}!")
+        exit()
+
+except ValueError:
+    # Handling non-integer input
+    print("Error! Please enter a valid integer between 1 and 4.")
+    exit()
+
+# Part 3: Checking User Input for Match
+
+# Setting result variable based on the match
+result = RED_BOX if player2_input == player1_input else WHITE_BOX
+
+# Part 4: Printing A String of Boxes
+
+# Building the full string of emoji boxes
+emoji_string = ""
+for box_number in range(1, 5):
+    if box_number == player2_input:
+        emoji_string += result
+    else:
+        emoji_string += BLUE_BOX
+
+# Printing the resulting emoji string of boxes
+print(emoji_string)
+
+# Printing the outcome message
+if player2_input == player1_input:
+    print("Correct! You hit the ship.")
+else:
+    print("Incorrect! You missed the ship.")

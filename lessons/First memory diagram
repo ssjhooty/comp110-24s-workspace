@@ -1,0 +1,5 @@
+"""First memory diagram"""
+
+name: str="Sartaj"
+print("Hello"+name)
+print("Bye"+name)
