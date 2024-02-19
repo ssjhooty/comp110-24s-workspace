@@ -1,63 +1,58 @@
-"""One Shot Battleship"""
+"""One Shot Battleship."""
 
 __author__ = "730475919"
 
-#Establishing constants.
-grid_size: int = 4
-secret_row: int = 3
-secret_column: int = 2
+# Part 1
 
-#Defining the parameters of a valid guess.
-def valid_guess(row, column):
-    return 1 <= row <= grid_size and 1 <= column <= grid_size
-def invalid_guess(row, column):
-    return row<1 or row>grid_size and column<1 or column>grid_size
+# Establishing constants
+grid_size = 4
+secret_row = 3
+secret_column = 2
 
-#Prompting for input.
-guess_row: int = int(input("Guess a row: "))
-guess_column: int = int(input("Guess a column: "))
-
-#Printing the correct word string response based on user input.
-if valid_guess(guess_row,guess_column) and guess_row == secret_row and guess_column == secret_column:
-    print ("Hit!")
-elif valid_guess(guess_row,guess_column) and guess_row != secret_row and guess_column != secret_column:
-    print ("Miss!")
-elif valid_guess(guess_row,guess_column) and guess_row == secret_row and guess_column != secret_column:
-    print ("Close! Correct row, wrong column.")
-elif valid_guess(guess_row,guess_column) and guess_row != secret_row and guess_column == secret_column:
-    print ("Close! Correct column, wrong row.")
-elif invalid_guess(guess_row,guess_column):
-    print(f"The grid is only {grid_size} by {grid_size}. Try again:")
-
-#Establishing more constants (for colored boxes).
+# Establishing Part 2 constants
 BLUE_BOX: str = "\U0001F7E6"
 RED_BOX: str = "\U0001F7E5"
 WHITE_BOX: str = "\U00002B1C"
 
-#Creating the rules for printing the correct string of colored boxes in a grid format based on user input.
-if valid_guess(guess_row,guess_column):
-    def grid():
-        guess_box = RED_BOX if guess_row == secret_row and guess_column == secret_column else WHITE_BOX
-        row_number = 1
+# Prompting for a row guess
+guess_row = int(input("Guess a row: "))
 
-        while row_number <= grid_size:
-            column_number = 1
-            row_string = ""
+# Notifying user of invalid row guess
+while guess_row < 1 or guess_row > grid_size:
+    guess_row = int(input(f"The grid is only {grid_size} by {grid_size}. Try again: "))
 
-            if row_number == guess_row:
-                while column_number <= grid_size:
-                    if column_number == guess_column:
-                        row_string += guess_box
-                    else:
-                        row_string += BLUE_BOX
-                    column_number += 1
+# Prompting for a column guess
+guess_column = int(input("Guess a column: "))
+
+# Notifying user of invalid column guess
+while guess_column < 1 or guess_column > grid_size:
+    guess_column = int(input(f"The grid is only {grid_size} by {grid_size}. Try again: "))
+
+# Part 2
+
+# Establishing counter variables and printing the emoji row
+row_counter = 1
+while row_counter <= grid_size:
+    emoji_row = ""
+    column_counter = 1
+    while column_counter <= grid_size:
+        if guess_column == column_counter and guess_row == row_counter:
+            if guess_column == secret_column and guess_row == secret_row:
+                emoji_row += RED_BOX
             else:
-                while column_number <= grid_size:
-                    row_string += BLUE_BOX
-                    column_number += 1
+                emoji_row += WHITE_BOX
+        else:
+            emoji_row += BLUE_BOX
+        column_counter += 1
+    print(emoji_row)
+    row_counter += 1
 
-            print(row_string)
-            row_number += 1
-
-#Printing said grid.
-grid()
+# Printing text strings based on outcome
+if guess_row == secret_row and guess_column == secret_column:
+    print("Hit!")
+elif guess_row == secret_row:
+    print("Close! Correct row, wrong column.")
+elif guess_column == secret_column:
+    print("Close! Correct column, wrong row.")
+else:
+    print("Miss!")
