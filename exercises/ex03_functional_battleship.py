@@ -11,6 +11,18 @@ HIT_CELL: str = "\U0001F7E5"
 
 
 # Establishing input guess function
+# def input_guess(grid_size: int, row_or_column: str) -> int:
+    # """Prompting for the input guess, and delivering the appropriate textual response."""
+    #massert row_or_column == "row" or row_or_column == "column", "Invalid input. Expected 'row' or 'column'."
+    # assert grid_size
+    # guess_str = input(f"Guess a {row_or_column}: ")
+    # if guess_str == int:
+        # if 1 <= guess_str <= grid_size:
+            # return guess_str
+        # else:
+            # print(f"The grid is only 1-{grid_size} by 1-{grid_size}. Try again.")
+    # else:
+        # print("Invalid input. Please enter a number.")
 def input_guess(grid_size: int, row_or_column: str) -> int:
     """Prompting for the input guess, and delivering the appropriate textual response."""
     assert row_or_column == "row" or row_or_column == "column", "Invalid input. Expected 'row' or 'column'."
