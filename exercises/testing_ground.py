@@ -56,3 +56,19 @@ elif guess_column == secret_column:
     print("Close! Correct column, wrong row.")
 else:
     print("Miss!")
+
+
+
+
+def invert(non_inverted: (dict[str, str])) -> dict[str, str]:
+    """Function that inverts a dictionary."""
+    inverted: dict[str, str] = {}
+    values_seen = []   # List to keep track of the values seen so far
+    for key, value in non_inverted.items():
+        if value in values_seen:  # If a to-be key has already been recorded
+            raise KeyError("Duplicate key was detected.")
+        else:
+            inverted[key] = value  # Establishing the new key assuming it is not a duplicate
+            values_seen.append(value)
+        inverted[value] = key  # Establishing the new value
+    return inverted
