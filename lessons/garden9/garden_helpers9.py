@@ -5,9 +5,10 @@ __author__ = "730475919"
 def add_by_kind(by_kind: dict[str, list[str]], new_plant_kind: str, new_plant: str) -> None:
     """Add plant under its kind."""
     if new_plant_kind in by_kind:
-        by_kind[new_plant_kind].append(new_plant)  # Append to existing list
+        by_kind[new_plant_kind] = []
     else:
-        by_kind[new_plant_kind] = [new_plant]  # Create new list with new plant
+        by_kind[new_plant_kind] = []
+        by_kind[new_plant_kind].append(new_plant)
 
 
 def add_by_date(garden_by_date: dict[str, list[str]], month: str, plant: str) -> None:
@@ -15,7 +16,8 @@ def add_by_date(garden_by_date: dict[str, list[str]], month: str, plant: str) ->
     if month in garden_by_date:
         garden_by_date[month].append(plant)
     else:
-        garden_by_date[month] = [plant]
+        garden_by_date[month] = []
+        garden_by_date[month].append(plant)
 
 
 def lookup_by_kind_and_date(plants_by_kind: dict[str, list[str]], plants_by_date: dict[str, list[str]], kind: str, month: str) -> str:
@@ -24,8 +26,12 @@ def lookup_by_kind_and_date(plants_by_kind: dict[str, list[str]], plants_by_date
     assert month in plants_by_date
     kind_list: list[str] = plants_by_kind[kind]
     month_list: list[str] = plants_by_date[month]
-    combined_list: list[str] = [plant for plant in kind_list if plant in month_list]
-    if combined_list:
+    combined_list: list[str] = []
+    for plant in kind_list:
+        for other_plant in month_list:
+            if plant == other_plant:
+                combined_list.append(other_plant)
+    if len(combined_list) > 0:
         return f"{kind}s to plant in {month}: {combined_list}"
     else:
         return f"No {kind}s to plant in {month}."

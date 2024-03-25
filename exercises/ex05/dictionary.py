@@ -5,23 +5,29 @@ __author__ = "730475919"
 
 def invert(non_inverted: dict[str, str]) -> dict[str, str]:
     """Function that inverts a dictionary."""
-    inverted: dict[str, str] = {}
-    for key, value in non_inverted.items():
+    inverted = {}
+    for key in non_inverted:
+        value = non_inverted[key]
         if value in inverted:  # If a to-be key has already been recorded
-            raise KeyError("Duplicate key was detected.")  # Raise a key error
+            raise KeyError()  # Raise a key error
         inverted[value] = key
     return inverted
 
 
 def favorite_color(color_dict: dict[str, str]) -> str:
     """Function that returns the most popular color."""
+    most_popular_color: str = ""
+    color_count: int = 0
     color_counter: dict[str, int] = {} 
-    for color in color_dict.values():
-        if color in color_counter:
-            color_counter[color] += 1  # Adding one each time the color appears again
+    for color in color_dict:
+        if color_dict[color] in color_counter:
+            color_counter[color_dict[color]] += 1  # Adding one each time the color appears again
         else:
-            color_counter[color] = 1  # Establishing a frequency of one the first time a color appears
-    most_popular_color = max(color_counter, key=color_counter.get)
+            color_counter[color_dict[color]] = 1  # Establishing a frequency of one the first time a color appears
+    for color in color_counter:
+        if color_counter[color] > color_count:
+            most_popular_color = color
+            color_count = color_counter[color]
     return most_popular_color
 
 
