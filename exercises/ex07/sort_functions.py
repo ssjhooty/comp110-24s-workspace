@@ -1,12 +1,10 @@
 """Functions that implement sorting algorithms."""
 
-__author__ = ""
+__author__ = "730475919"
 
 
 def insertion_sort(x: list[int]) -> None:
-    """Basic insertion sort algorithm.
-    Insert into an already sorted list."""
-    
+    """Basic insertion sort algorithm; insert into an already sorted list."""
     # Step 1: Create an index variable to track the sorted indices in the list.
     sorted_index = 0
     
@@ -30,9 +28,7 @@ def insertion_sort(x: list[int]) -> None:
 
 
 def selection_sort(x: list[int]) -> None:
-    """Basic selection sort algorithm. 
-    Repeatedly find the minimum and swap it."""
-    
+    """Basic selection sort algorithm; repeatedly find the minimum and swap it."""
     # Step 1: Create a counter variable to track the indices of the list.
     counter = 0
     
@@ -57,16 +53,3 @@ def selection_sort(x: list[int]) -> None:
         # Step 6: Increment the counter.
         counter += 1
     return None
-
-
-#def insertion_sort(x: list[int]) -> None:
-    """Basic insertion sort algorithm.
-    Insert into an already sorted list."""
-    return None
-
-
-#def selection_sort(x: list[int]) -> None:
-    """Basic selection sort algorithm. 
-    Repeatedly find the minimum and swap it."""
-    return None
-    
