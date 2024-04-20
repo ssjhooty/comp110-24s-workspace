@@ -5,7 +5,7 @@ from turtle import Turtle, colormode, done, Screen
 colormode(255)
 
 
-def draw_airplane_fuselage(airplane: Turtle, x: float, y: float, size: float):
+def draw_airplane_fuselage(airplane: Turtle, x: float, y: float, size: float) -> None:
     """Drawing the fuselage of the airplane as a rectangle."""
     airplane.color("white")
     airplane.penup()
@@ -23,7 +23,7 @@ def draw_airplane_fuselage(airplane: Turtle, x: float, y: float, size: float):
     airplane.end_fill()
 
 
-def draw_airplane_nosecone(airplane: Turtle, x: float, y: float, size: float):
+def draw_airplane_nosecone(airplane: Turtle, x: float, y: float, size: float) -> None:
     """Drawing the nosecone of the airplane as a semicircle."""
     airplane.penup()
     airplane.goto(x, y)
@@ -36,7 +36,7 @@ def draw_airplane_nosecone(airplane: Turtle, x: float, y: float, size: float):
     airplane.end_fill()
 
 
-def draw_airplane_tail(airplane: Turtle, x: float, y: float, size: float):
+def draw_airplane_tail(airplane: Turtle, x: float, y: float, size: float) -> None:
     """Draw the tail of the airplane as a right triangle."""
     airplane.penup()
     airplane.goto(x + 167, y + 58)  # Adjusting location of tail
@@ -54,7 +54,7 @@ def draw_airplane_tail(airplane: Turtle, x: float, y: float, size: float):
     airplane.end_fill()
 
 
-def draw_left_wing(airplane: Turtle, x: float, y: float, size: float):
+def draw_left_wing(airplane: Turtle, x: float, y: float, size: float) -> None:
     """Drawing the left wing of the airplane."""
     airplane.penup()
     airplane.goto(x + 115, y - 300)
@@ -71,7 +71,7 @@ def draw_left_wing(airplane: Turtle, x: float, y: float, size: float):
     airplane.end_fill()
 
 
-def draw_right_wing(airplane: Turtle, x: float, y: float, size: float):
+def draw_right_wing(airplane: Turtle, x: float, y: float, size: float) -> None:
     """Drawing the right wing of the airplane."""
     airplane.penup()
     airplane.goto(x + 58, y + 10)
@@ -88,8 +88,8 @@ def draw_right_wing(airplane: Turtle, x: float, y: float, size: float):
     airplane.end_fill()
 
 
-def draw_star(star: Turtle, x: float, y: float, size: float):
-    """Draw a star at the given position with the given size. This is my sixth component so it is my attempt at the 'Above and Beyond' portion of the rubric."""
+def draw_star(star: Turtle, x: float, y: float, size: float) -> None:
+    """Draw a singular star."""
     star.penup()
     star.goto(x, y)
     star.pendown()
@@ -101,6 +101,14 @@ def draw_star(star: Turtle, x: float, y: float, size: float):
         star.forward(25 * size)
         star.right(144)
     star.end_fill()
+
+
+def draw_stars_recursive(star_turtle: Turtle, stars: list):
+    """Draw stars recursively."""
+    if stars:
+        x, y, size = stars[0]
+        draw_star(star_turtle, x, y, size)
+        draw_stars_recursive(star_turtle, stars[1:])
 
 
 def main() -> None:
@@ -120,12 +128,12 @@ def main() -> None:
     draw_right_wing(airplane_turtle, -100, 0, 1)
 
     # Draw the stars in the sky
-    star_turtle: Turtle = Turtle()  # Create a turtle for the stars
-    star_turtle.speed(0)  # Set max speed
+    star_turtle = Turtle()  # Create a turtle for the stars
+    star_turtle.speed(0)  # Set the maximum speed
     star_turtle.hideturtle()  # Hide the default turtle
-    draw_star(star_turtle, -200, 100, 0.5)
-    draw_star(star_turtle, 150, -50, 0.7)
-    draw_star(star_turtle, -50, 150, 0.4)
+
+    stars = [(-200, 100, 0.5), (150, -50, 0.7), (-50, 150, 0.4)]
+    draw_stars_recursive(star_turtle, stars)
 
     done()
 
